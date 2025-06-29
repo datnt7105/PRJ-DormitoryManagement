@@ -9,14 +9,18 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.service.AdminService;
 import model.entity.Admin;
+import model.dao.AdminDAO;
 
+@WebServlet(name = "AdminLoginController", urlPatterns = {"/AdminLoginController"})
 public class AdminLoginController extends HttpServlet {
 
     private AdminService adminService;
+    private AdminDAO adminDAO;
 
     @Override
     public void init() throws ServletException {
         adminService = new AdminService();
+        adminDAO = new AdminDAO();
     }
 
     @Override
@@ -33,23 +37,26 @@ public class AdminLoginController extends HttpServlet {
         }
 
         try {
-            // Đăng nhập mặc định nếu là admin/admin123
-           
-            if (emailOrUsername.equals("admin") && password.equals("admin123")) {
-                Admin admin = new Admin();
-                admin.setUsername("admin");
-                admin.setFullName("Quản trị viên mặc định");
-                admin.setEmail("admin@example.com");
-                request.getSession().setAttribute("admin", admin);
-                request.getSession().setAttribute("adminID", admin.getAdminId()); // lưu adminId vào session
-                response.sendRedirect(request.getContextPath() + "/view/admin/dashboard.jsp");
-                return;
+            // Kiểm tra tài khoản admin trong cơ sở dữ liệu
+            Admin admin = adminService.authenticateAdmin(emailOrUsername, password);
+            if (admin == null && emailOrUsername.equals("admin") && password.equals("admin123")) {
+                // Nếu tài khoản mặc định chưa tồn tại, tạo mới
+                if (!adminService.checkIfAdminExists()) {
+                    adminDAO.createDefaultAdmin("admin", "admin123");
+                }
+                // Lấy thông tin admin từ cơ sở dữ liệu
+                admin = adminDAO.findAdminByEmailOrUsername("admin");
+                if (admin == null || !org.mindrot.jbcrypt.BCrypt.checkpw("admin123", admin.getPassword())) {
+                    request.setAttribute("error", "Lỗi khi xác thực tài khoản admin mặc định.");
+                    request.getRequestDispatcher("/view/common/login.jsp").forward(request, response);
+                    return;
+                }
             }
 
-            Admin admin = adminService.authenticateAdmin(emailOrUsername, password);
             if (admin != null) {
                 request.getSession().setAttribute("admin", admin);
-                request.getSession().setAttribute("adminID", admin.getAdminId());
+                request.getSession().setAttribute("adminId", admin.getAdminId());
+                System.out.println("AdminLoginController: Đăng nhập thành công, adminId = " + admin.getAdminId());
                 response.sendRedirect(request.getContextPath() + "/view/admin/dashboard.jsp");
             } else {
                 request.setAttribute("error", "Email/Username hoặc mật khẩu không hợp lệ.");

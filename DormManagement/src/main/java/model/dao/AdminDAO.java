@@ -197,4 +197,26 @@ public class AdminDAO {
         }
         return null;
     }
+    
+    public boolean checkAdminExistById(int adminID) throws SQLException{
+        if(adminID<=0){
+            throw new IllegalArgumentException("adminID khoong hop le");
+        }
+        String sql = "select count(*) from Admin where AdminID = ?";
+        try(Connection conn = new DBContext().getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql)){
+            ps.setInt(1, adminID);
+            try(ResultSet rs = ps.executeQuery()){
+                if(rs.next()){
+                    return rs.getInt(1) > 0;
+                }
+            }
+            
+        }catch(SQLException e){
+            System.out.println("Không tìm thấy ADMIN nhéeeeee!!!!");
+        }
+        return false;
+    }
+
+    
 }

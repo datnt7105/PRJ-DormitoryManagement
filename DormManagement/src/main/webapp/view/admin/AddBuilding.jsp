@@ -4,7 +4,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Chi Tiết Tòa Nhà - Hệ Thống Quản Lý Ký Túc Xá</title>
+        <title>Thêm Tòa Nhà - Hệ Thống Quản Lý Ký Túc Xá</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
         <style>
@@ -22,12 +22,6 @@
             .sidebar .nav-link.active {
                 color: white;
                 background-color: rgba(255,255,255,.1);
-            }
-            .building-image {
-                max-width: 100%;
-                height: auto;
-                max-height: 400px;
-                object-fit: cover;
             }
         </style>
     </head>
@@ -70,7 +64,7 @@
 
                 <!-- Main Content -->
                 <div class="col-md-9 col-lg-10 p-4">
-                    <h2>Chi Tiết Tòa Nhà</h2>
+                    <h2>Thêm Tòa Nhà</h2>
                     <hr>
                     <c:if test="${not empty error}">
                         <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -78,40 +72,29 @@
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                     </c:if>
-                    <c:choose>
-                        <c:when test="${empty building}">
-                            <div class="alert alert-warning" role="alert">
-                                Không tìm thấy tòa nhà với ID này.
-                            </div>
-                            <a href="${pageContext.request.contextPath}/BuildingController?action=list" class="btn btn-secondary">Quay lại</a>
-                        </c:when>
-                        <c:otherwise>
-                            <div class="card">
-                                <div class="card-body">
-                                    <h4 class="card-title">${building.buildingName}</h4>
-                                    <p class="card-text"><strong>ID Tòa Nhà:</strong> ${building.buildingID}</p>
-                                    <p class="card-text"><strong>Số Tầng:</strong> ${building.numberFloors}</p>
-                                    <p class="card-text"><strong>Trạng Thái:</strong> 
-                                        <c:choose>
-                                            <c:when test="${building.status == 'active'}">Hoạt động</c:when>
-                                            <c:otherwise>Không hoạt động</c:otherwise>
-                                        </c:choose>
-                                    </p>
-                                    <p class="card-text"><strong>Admin ID:</strong> ${building.adminID}</p>
-                                    <c:if test="${not empty building.imageUrl}">
-                                        <p class="card-text"><strong>Hình Ảnh:</strong></p>
-                                        <img src="${building.imageUrl}" class="building-image" alt="${building.buildingName}">
-                                    </c:if>
-                                </div>
-                                <div class="card-footer">
-                                    <a href="${pageContext.request.contextPath}/BuildingController?action=edit&buildingID=${building.buildingID}" class="btn btn-warning">
-                                        <i class="bi bi-pencil"></i> Sửa
-                                    </a>
-                                    <a href="${pageContext.request.contextPath}/BuildingController?action=list" class="btn btn-secondary">Quay lại</a>
-                                </div>
-                            </div>
-                        </c:otherwise>
-                    </c:choose>
+                    <form action="${pageContext.request.contextPath}/BuildingController?action=add" method="POST" enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <label for="buildingName" class="form-label">Tên Tòa Nhà</label>
+                            <input type="text" class="form-control" id="buildingName" name="buildingName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="numberFloors" class="form-label">Số Tầng</label>
+                            <input type="number" class="form-control" id="numberFloors" name="numberFloors" min="1" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="status" class="form-label">Trạng Thái</label>
+                            <select class="form-select" id="status" name="status" required>
+                                <option value="active">Hoạt động</option>
+                                <option value="inactive">Không hoạt động</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="imageFile" class="form-label">Hình Ảnh</label>
+                            <input type="file" class="form-control" id="imageFile" name="imageFile" accept=".jpg,.png,.webp">
+                        </div>
+                        <button type="submit" class="btn btn-primary"><i class="bi bi-save"></i> Thêm</button>
+                        <a href="${pageContext.request.contextPath}/BuildingController?action=list" class="btn btn-secondary">Hủy</a>
+                    </form>
                 </div>
             </div>
         </div>

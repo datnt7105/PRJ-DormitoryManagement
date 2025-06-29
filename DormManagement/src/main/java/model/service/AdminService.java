@@ -41,4 +41,8 @@ public class AdminService {
     public Admin getAdminById(int adminId) throws SQLException {
         return adminDAO.getAdminById(adminId);
     }
+
+    public boolean checkAdminExistsById(int adminId) throws SQLException {
+        return adminDAO.checkAdminExistById(adminId);
+    }
 }
