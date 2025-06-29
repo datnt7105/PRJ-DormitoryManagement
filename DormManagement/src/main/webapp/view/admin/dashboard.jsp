@@ -45,7 +45,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="buildings">
+                                <a class="nav-link" href="Building.jsp">
                                     <i class="bi bi-building"></i> Buildings
                                 </a>
                             </li>

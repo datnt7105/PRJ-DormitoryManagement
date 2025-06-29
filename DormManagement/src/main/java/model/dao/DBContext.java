@@ -12,7 +12,7 @@ public class DBContext {
     private static DBContext instance;
     private Connection connection;
 
-    private DBContext() {
+    public DBContext() {
         // Không khởi tạo kết nối ngay, chỉ khi cần
     }
 
@@ -27,8 +27,8 @@ public class DBContext {
         if (connection == null || connection.isClosed()) {
             try {
                 String user = "sa";
-                String password = "123456789";
-                String url = "jdbc:sqlserver://localhost:1433;databaseName=Dorm;encrypt=true;trustServerCertificate=true";
+                String password = "12";
+                String url = "jdbc:sqlserver://localhost:1433;databaseName=PRJ;encrypt=true;trustServerCertificate=true";
                 Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
                 connection = DriverManager.getConnection(url, user, password);
                 System.out.println("DBContext: Đã tạo kết nối mới thành công.");

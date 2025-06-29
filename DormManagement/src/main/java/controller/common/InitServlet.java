@@ -35,7 +35,16 @@ public class InitServlet extends HttpServlet {
                 defaultAdmin.setFullName("Default Admin");
                 defaultAdmin.setEmail("admin@example.com");
 
-                adminService.createAdmin(defaultAdmin);
+                int adminID = adminService.createAdmin(defaultAdmin);
+                if(adminID != -1){
+                    defaultAdmin.setAdminId(adminID);// references adminID to Admin
+                    LOGGER.log(Level.INFO,"InitServlet: created an defaulted admin account:"
+                            + "username=admin, password = admin123, adminID={0}", adminID);
+                }else{
+                    LOGGER.log(Level.INFO, "InitServlet: can't created defaulted admin account");
+                    throw new ServletException("Can not create an defaulted account!!!");
+                }
+                defaultAdmin.setAdminId(adminID); 
 
                 LOGGER.log(Level.INFO, "InitServlet: Đã tạo tài khoản admin mặc định: username=admin, password=admin123");
             } else {

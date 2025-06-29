@@ -26,6 +26,8 @@
                 margin: 10px 0;
                 border: none;
                 border-radius: 5px;
+                text-align: left;
+                box-sizing: border-box;
             }
             .login-container button {
                 width: 100%;
@@ -35,6 +37,7 @@
                 border-radius: 5px;
                 color: #fff;
                 cursor: pointer;
+                margin-top: 10px;
             }
             .login-container button:hover {
                 background-color: #e65c00;
@@ -52,6 +55,9 @@
                 color: #ff0000;
                 margin-bottom: 10px;
             }
+            .form-group {
+                margin-bottom: 10px;
+            }
         </style>
     </head>
     <body>
@@ -65,8 +71,12 @@
             <p class="error"><%= request.getAttribute("error") %></p>
             <% } %>
             <form action="${pageContext.request.contextPath}/login" method="post">
-                <input type="text" name="emailOrUsername" placeholder="Tên đăng nhập hoặc Email" required>
-                <input type="password" name="password" placeholder="Mật khẩu" required>
+                <div class="form-group">
+                    <input type="text" name="emailOrUsername" placeholder="Tên đăng nhập hoặc Email" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" name="password" placeholder="Mật khẩu" required>
+                </div>
                 <button type="submit">Đăng Nhập</button>
             </form>
             <a href="${pageContext.request.contextPath}/RegistraServlet">Chưa có tài khoản? Đăng Ký</a>

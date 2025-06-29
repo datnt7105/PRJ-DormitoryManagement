@@ -22,7 +22,7 @@ public class AdminService {
         return null;
     }
 
-    public boolean createAdmin(Admin admin) throws SQLException {
+    public int createAdmin(Admin admin) throws SQLException {
         if (admin.getPassword() == null || admin.getPassword().trim().isEmpty()) {
             throw new IllegalArgumentException("Mật khẩu không được để trống.");
         }
@@ -31,7 +31,7 @@ public class AdminService {
         admin.setUpdatedAt(new Date(System.currentTimeMillis()));
 
         int result = adminDAO.createAdmin(admin);
-        return result > 0;
+        return result;
     }
 
     public boolean checkIfAdminExists() throws SQLException {
