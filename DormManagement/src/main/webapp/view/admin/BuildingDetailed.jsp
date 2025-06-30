@@ -23,11 +23,25 @@
                 color: white;
                 background-color: rgba(255,255,255,.1);
             }
+            .main-content {
+                background-color: #f8f9fa;
+                padding: 2rem;
+            }
+            .card {
+                border: none;
+                border-radius: 10px;
+                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            }
             .building-image {
                 max-width: 100%;
                 height: auto;
                 max-height: 400px;
                 object-fit: cover;
+                border-radius: 8px;
+            }
+            .btn-action {
+                font-size: 0.9rem;
+                padding: 0.5rem 1rem;
             }
         </style>
     </head>
@@ -41,13 +55,10 @@
                         <hr>
                         <ul class="nav flex-column">
                             <li class="nav-item">
-                                <a class="nav-link" href="${pageContext.request.contextPath}/dashboard"><i class="bi bi-speedometer2"></i> Bảng Điều Khiển</a>
+                                <a class="nav-link" href="${pageContext.request.contextPath}/dashboard"><i class="bi bi-speedometer2"></i> Tổng Quan</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" href="${pageContext.request.contextPath}/BuildingController?action=list"><i class="bi bi-building"></i> Tòa Nhà</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="${pageContext.request.contextPath}/rooms"><i class="bi bi-door-open"></i> Phòng</a>
+                                <a class="nav-link active" href="${pageContext.request.contextPath}/dashboard#buildings-section"><i class="bi bi-building"></i> Tòa Nhà</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="${pageContext.request.contextPath}/students"><i class="bi bi-people"></i> Sinh Viên</a>
@@ -69,7 +80,7 @@
                 </div>
 
                 <!-- Main Content -->
-                <div class="col-md-9 col-lg-10 p-4">
+                <div class="col-md-9 col-lg-10 main-content">
                     <h2>Chi Tiết Tòa Nhà</h2>
                     <hr>
                     <c:if test="${not empty error}">
@@ -83,13 +94,13 @@
                             <div class="alert alert-warning" role="alert">
                                 Không tìm thấy tòa nhà với ID này.
                             </div>
-                            <a href="${pageContext.request.contextPath}/BuildingController?action=list" class="btn btn-secondary">Quay lại</a>
+                            <a href="${pageContext.request.contextPath}/dashboard#buildings-section" class="btn btn-secondary btn-action">Quay lại</a>
                         </c:when>
                         <c:otherwise>
                             <div class="card">
                                 <div class="card-body">
                                     <h4 class="card-title">${building.buildingName}</h4>
-                                    <p class="card-text"><strong>ID Tòa Nhà:</strong> ${building.buildingID}</p>
+                                    <p class="card-text"><strong>Mã Tòa Nhà:</strong> ${building.buildingID}</p>
                                     <p class="card-text"><strong>Số Tầng:</strong> ${building.numberFloors}</p>
                                     <p class="card-text"><strong>Trạng Thái:</strong> 
                                         <c:choose>
@@ -97,17 +108,17 @@
                                             <c:otherwise>Không hoạt động</c:otherwise>
                                         </c:choose>
                                     </p>
-                                    <p class="card-text"><strong>Admin ID:</strong> ${building.adminID}</p>
+                                    <p class="card-text"><strong>Mã Quản Trị:</strong> ${building.adminID}</p>
                                     <c:if test="${not empty building.imageUrl}">
                                         <p class="card-text"><strong>Hình Ảnh:</strong></p>
                                         <img src="${building.imageUrl}" class="building-image" alt="${building.buildingName}">
                                     </c:if>
                                 </div>
                                 <div class="card-footer">
-                                    <a href="${pageContext.request.contextPath}/BuildingController?action=edit&buildingID=${building.buildingID}" class="btn btn-warning">
+                                    <a href="${pageContext.request.contextPath}/BuildingController?action=edit&buildingID=${building.buildingID}" class="btn btn-warning btn-action">
                                         <i class="bi bi-pencil"></i> Sửa
                                     </a>
-                                    <a href="${pageContext.request.contextPath}/BuildingController?action=list" class="btn btn-secondary">Quay lại</a>
+                                    <a href="${pageContext.request.contextPath}/dashboard#buildings-section" class="btn btn-secondary btn-action">Quay lại</a>
                                 </div>
                             </div>
                         </c:otherwise>

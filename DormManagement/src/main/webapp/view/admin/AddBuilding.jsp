@@ -23,6 +23,22 @@
                 color: white;
                 background-color: rgba(255,255,255,.1);
             }
+            .main-content {
+                background-color: #f8f9fa;
+                padding: 2rem;
+            }
+            .card {
+                border: none;
+                border-radius: 10px;
+                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            }
+            .form-label {
+                font-weight: 500;
+            }
+            .btn-action {
+                font-size: 0.9rem;
+                padding: 0.5rem 1rem;
+            }
         </style>
     </head>
     <body>
@@ -35,13 +51,10 @@
                         <hr>
                         <ul class="nav flex-column">
                             <li class="nav-item">
-                                <a class="nav-link" href="${pageContext.request.contextPath}/dashboard"><i class="bi bi-speedometer2"></i> Bảng Điều Khiển</a>
+                                <a class="nav-link" href="${pageContext.request.contextPath}/dashboard"><i class="bi bi-speedometer2"></i> Tổng Quan</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" href="${pageContext.request.contextPath}/BuildingController?action=list"><i class="bi bi-building"></i> Tòa Nhà</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="${pageContext.request.contextPath}/rooms"><i class="bi bi-door-open"></i> Phòng</a>
+                                <a class="nav-link active" href="${pageContext.request.contextPath}/dashboard#buildings-section"><i class="bi bi-building"></i> Tòa Nhà</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="${pageContext.request.contextPath}/students"><i class="bi bi-people"></i> Sinh Viên</a>
@@ -63,7 +76,7 @@
                 </div>
 
                 <!-- Main Content -->
-                <div class="col-md-9 col-lg-10 p-4">
+                <div class="col-md-9 col-lg-10 main-content">
                     <h2>Thêm Tòa Nhà</h2>
                     <hr>
                     <c:if test="${not empty error}">
@@ -72,29 +85,33 @@
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                     </c:if>
-                    <form action="${pageContext.request.contextPath}/BuildingController?action=add" method="POST" enctype="multipart/form-data">
-                        <div class="mb-3">
-                            <label for="buildingName" class="form-label">Tên Tòa Nhà</label>
-                            <input type="text" class="form-control" id="buildingName" name="buildingName" required>
+                    <div class="card">
+                        <div class="card-body">
+                            <form action="${pageContext.request.contextPath}/BuildingController?action=add" method="POST" enctype="multipart/form-data">
+                                <div class="mb-3">
+                                    <label for="buildingName" class="form-label">Tên Tòa Nhà</label>
+                                    <input type="text" class="form-control" id="buildingName" name="buildingName" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="numberFloors" class="form-label">Số Tầng</label>
+                                    <input type="number" class="form-control" id="numberFloors" name="numberFloors" min="1" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="status" class="form-label">Trạng Thái</label>
+                                    <select class="form-select" id="status" name="status" required>
+                                        <option value="active">Hoạt động</option>
+                                        <option value="inactive">Không hoạt động</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="imageFile" class="form-label">Hình Ảnh</label>
+                                    <input type="file" class="form-control" id="imageFile" name="imageFile" accept=".jpg,.png,.webp">
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-action"><i class="bi bi-save"></i> Thêm</button>
+                                <a href="${pageContext.request.contextPath}/dashboard#buildings-section" class="btn btn-secondary btn-action">Hủy</a>
+                            </form>
                         </div>
-                        <div class="mb-3">
-                            <label for="numberFloors" class="form-label">Số Tầng</label>
-                            <input type="number" class="form-control" id="numberFloors" name="numberFloors" min="1" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="status" class="form-label">Trạng Thái</label>
-                            <select class="form-select" id="status" name="status" required>
-                                <option value="active">Hoạt động</option>
-                                <option value="inactive">Không hoạt động</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="imageFile" class="form-label">Hình Ảnh</label>
-                            <input type="file" class="form-control" id="imageFile" name="imageFile" accept=".jpg,.png,.webp">
-                        </div>
-                        <button type="submit" class="btn btn-primary"><i class="bi bi-save"></i> Thêm</button>
-                        <a href="${pageContext.request.contextPath}/BuildingController?action=list" class="btn btn-secondary">Hủy</a>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>

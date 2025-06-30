@@ -12,25 +12,26 @@ import model.entity.Building;
 public class BuildingDAO {
 
     private Connection conn;
-    private String imageBasePath; // Đường dẫn gốc để xóa file (truyền từ BuildingController)
+    private String imageBasePath;
 
     public BuildingDAO(Connection conn, String imageBasePath) {
         this.conn = conn;
-        this.imageBasePath = imageBasePath; // Ví dụ: /path/to/webapp/images
+        this.imageBasePath = imageBasePath;
     }
 
     public List<Building> getAllBuildings() throws SQLException {
         List<Building> buildings = new ArrayList<>();
         String sql = "SELECT BuildingID, BuildingName, AdminID, Floors, Status, ImageUrl FROM Building";
-        try (PreparedStatement pstmt = conn.prepareStatement(sql); ResultSet rs = pstmt.executeQuery()) {
+        try (PreparedStatement pstmt = conn.prepareStatement(sql);
+             ResultSet rs = pstmt.executeQuery()) {
             while (rs.next()) {
                 Building building = new Building(
-                        rs.getInt("BuildingID"),
-                        rs.getString("BuildingName"),
-                        rs.getInt("AdminID"),
-                        rs.getInt("Floors"),
-                        rs.getString("Status"),
-                        rs.getString("ImageUrl")
+                    rs.getInt("BuildingID"),
+                    rs.getString("BuildingName"),
+                    rs.getInt("AdminID"),
+                    rs.getInt("Floors"),
+                    rs.getString("Status"),
+                    rs.getString("ImageUrl")
                 );
                 buildings.add(building);
             }
@@ -45,12 +46,12 @@ public class BuildingDAO {
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
                     return new Building(
-                            rs.getInt("BuildingID"),
-                            rs.getString("BuildingName"),
-                            rs.getInt("AdminID"),
-                            rs.getInt("Floors"),
-                            rs.getString("Status"),
-                            rs.getString("ImageUrl")
+                        rs.getInt("BuildingID"),
+                        rs.getString("BuildingName"),
+                        rs.getInt("AdminID"),
+                        rs.getInt("Floors"),
+                        rs.getString("Status"),
+                        rs.getString("ImageUrl")
                     );
                 }
             }
@@ -84,36 +85,22 @@ public class BuildingDAO {
     }
 
     public boolean deleteBuilding(int buildingID) throws SQLException {
-        // Lấy thông tin tòa nhà để xóa file hình ảnh
         Building building = getBuildingById(buildingID);
         if (building != null && building.getImageUrl() != null && !building.getImageUrl().isEmpty()) {
-            // Xóa file hình ảnh từ thư mục
-            String filePath = imageBasePath + building.getImageUrl().substring(building.getImageUrl().lastIndexOf("/"));
+            // Lấy phần tên file từ ImageUrl (giả sử ImageUrl là /images/filename.jpg)
+            String fileName = building.getImageUrl().substring(building.getImageUrl().lastIndexOf("/") + 1);
+            String filePath = imageBasePath + File.separator + fileName;
             File file = new File(filePath);
             if (file.exists()) {
                 file.delete();
             }
         }
 
-        // Xóa bản ghi trong cơ sở dữ liệu
         String sql = "DELETE FROM Building WHERE BuildingID = ?";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, buildingID);
             return pstmt.executeUpdate() > 0;
         }
-    }
-
-    public boolean isBuildingNameExist(String buildingName) throws SQLException {
-        String sql = "SELECT COUNT(*) FROM Building WHERE BuildingName = ?";
-        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, buildingName);
-            try (ResultSet rs = pstmt.executeQuery()) {
-                if (rs.next()) {
-                    return rs.getInt(1) > 0;
-                }
-            }
-        }
-        return false;
     }
 
     public boolean hasRelatedRooms(int buildingID) throws SQLException {
