@@ -94,7 +94,8 @@
                             <div class="alert alert-warning" role="alert">
                                 Không tìm thấy tòa nhà với ID này.
                             </div>
-                            <a href="${pageContext.request.contextPath}/dashboard#buildings-section" class="btn btn-secondary btn-action">Quay lại</a>
+                            <a href="${pageContext.request.contextPath}/view/admin/dashboard.jsp?tab=building" class="btn btn-secondary btn-action">Hủy</a>
+
                         </c:when>
                         <c:otherwise>
                             <div class="card">
@@ -118,7 +119,8 @@
                                     <a href="${pageContext.request.contextPath}/BuildingController?action=edit&buildingID=${building.buildingID}" class="btn btn-warning btn-action">
                                         <i class="bi bi-pencil"></i> Sửa
                                     </a>
-                                    <a href="${pageContext.request.contextPath}/dashboard#buildings-section" class="btn btn-secondary btn-action">Quay lại</a>
+                                    <a href="${pageContext.request.contextPath}/view/admin/dashboard.jsp?tab=building" class="btn btn-secondary btn-action">Quay lại</a>
+
                                 </div>
                             </div>
                         </c:otherwise>

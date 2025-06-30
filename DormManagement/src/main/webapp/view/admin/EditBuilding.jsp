@@ -96,7 +96,8 @@
                         <div class="alert alert-warning" role="alert">
                             Không tìm thấy tòa nhà để chỉnh sửa.
                         </div>
-                        <a href="${pageContext.request.contextPath}/dashboard#buildings-section" class="btn btn-secondary btn-action">Quay lại</a>
+                        <a href="${pageContext.request.contextPath}/view/admin/dashboard.jsp?tab=building" class="btn btn-secondary btn-action">Quay lại</a>
+
                     </c:if>
                     <c:if test="${not empty building}">
                         <div class="card">
@@ -127,7 +128,8 @@
                                         </c:if>
                                     </div>
                                     <button type="submit" class="btn btn-primary btn-action"><i class="bi bi-save"></i> Cập nhật</button>
-                                    <a href="${pageContext.request.contextPath}/dashboard#buildings-section" class="btn btn-secondary btn-action">Hủy</a>
+                                    <a href="${pageContext.request.contextPath}/view/admin/dashboard.jsp?tab=building" class="btn btn-secondary btn-action">Hủy</a>
+
                                 </form>
                             </div>
                         </div>
@@ -146,4 +148,4 @@
             }, 5000);
         </script>
     </body>
-</html>
+</html> 

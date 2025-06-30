@@ -55,7 +55,7 @@ public class BuildingController extends HttpServlet {
                 case "list":
                     List<Building> buildings = buildingDAO.getAllBuildings();
                     request.setAttribute("buildings", buildings != null ? buildings : List.of());
-                    request.setAttribute("showBuildings", true);
+                    request.setAttribute("tab", "building");
                     request.getRequestDispatcher("/view/admin/dashboard.jsp").forward(request, response);
                     break;
 

@@ -1,5 +1,9 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="model.dao.BuildingDAO, model.entity.Building, java.util.*" %>
+<%@ page import="model.dao.DBContext" %>
+
+
 <h2>Danh Sách Tòa Ký Túc Xá</h2>
 <hr>
 <c:if test="${not empty successMessage}">
@@ -15,6 +19,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 </c:if>
+
 <div class="mb-3">
     <a href="${pageContext.request.contextPath}/BuildingController?action=showAddForm" class="btn btn-primary">
         <i class="bi bi-plus-circle"></i> Thêm Tòa Nhà
