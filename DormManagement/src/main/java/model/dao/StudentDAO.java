@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import model.entity.StudentParent;
 import model.entity.Students;
 import org.mindrot.jbcrypt.BCrypt;
 
@@ -270,4 +271,71 @@ public class StudentDAO {
             return rowsAffected > 0;
         }
     }
+    
+    public List<StudentParent> getParentsByStudentID(int studentId) throws SQLException{
+        String sql = "Select * from StudentParent where StudentID = ? ";
+        List<StudentParent> parents = new ArrayList<>();
+        try(Connection conn = new DBContext().getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql)){
+            ps.setInt(1, studentId);
+            try(ResultSet rs = ps.executeQuery()){
+                while(rs.next()){
+                    StudentParent parent = new StudentParent();
+                    parent.setParentName(rs.getString("ParentName"));
+                    parent.setPhone(rs.getString("Phone"));
+                    parent.setRelationship(rs.getString("Relationship"));
+                    parent.setStudentId(rs.getInt("StudentId"));
+                    parent.setStudentParentId(rs.getInt("StudentParentId"));
+                    parents.add(parent);
+                }
+            }
+        }
+        return parents;
+    }
+    
+    public boolean updateParent(StudentParent parent) throws SQLException {
+        if (parent == null || parent.getStudentParentId() <= 0) {
+            throw new IllegalArgumentException("Thông tin phụ huynh hoặc StudentParentID không hợp lệ.");
+        }
+        String sql = "UPDATE StudentParent SET ParentName = ?, Phone = ?, Relationship = ? WHERE StudentParentID = ?";
+        try (Connection conn = dbContext.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, parent.getParentName());
+            stmt.setString(2, parent.getPhone());
+            stmt.setString(3, parent.getRelationship());
+            stmt.setInt(4, parent.getStudentParentId());
+            int rows = stmt.executeUpdate();
+            return rows > 0;
+        }
+    }
+    
+    public boolean insertParent(StudentParent parent) throws SQLException{
+        if(parent == null || parent.getStudentId() <= 0) {
+            throw new IllegalArgumentException("Thông tin phụ huynh hoặc StudentID không hợp lệ.");
+        }
+        String query = "Insert into StudentParent (StudentID, ParentName, Phone, Relationship) values (?,?,?,?)";
+        try(Connection conn = dbContext.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)){
+            stmt.setInt(1, parent.getStudentId());
+            stmt.setString(2, parent.getParentName());
+            stmt.setString(3, parent.getPhone());
+            stmt.setString(4, parent.getRelationship());
+            
+            int rowsAffectted = stmt.executeUpdate();
+            return rowsAffectted > 0;
+        }
+    }
+    
+    public boolean isParentPhoneExists(String phone, int excludeStudentParentId) throws SQLException {
+        String sql = "SELECT COUNT(*) FROM StudentParent WHERE Phone = ? AND StudentParentID != ?";
+        try (Connection conn = dbContext.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, phone);
+            stmt.setInt(2, excludeStudentParentId);
+            try (ResultSet rs = stmt.executeQuery()) {
+                return rs.next() && rs.getInt(1) > 0;
+            }
+        }
+    }
+    
 }

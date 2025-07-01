@@ -13,7 +13,7 @@ public class UserService {
         studentDAO = new StudentDAO();
     }
     
-    public boolean registerUser(String username, String email, String password, String fullName, String cccd, String phone) throws SQLException {
+    public boolean registerUser(String username, String email, String password, String fullName, String cccd, String phone, String gender, String address, Date dob) throws SQLException {
         // Kiểm tra xem username, email hoặc phone đã tồn tại chưa
         if (studentDAO.checkUserExists(username, email) || studentDAO.isPhoneExists(phone)) {
             return false;

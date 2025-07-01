@@ -73,20 +73,20 @@
             </div>
 
             <% if (request.getAttribute("error") != null) { %>
-                <div class="alert alert-danger" role="alert">
-                    <%= request.getAttribute("error") %>
-                </div>
+            <div class="alert alert-danger" role="alert">
+                <%= request.getAttribute("error") %>
+            </div>
             <% } %>
 
             <% if (request.getAttribute("successMessage") != null) { %>
-                <div class="alert alert-success" role="alert">
-                    <%= request.getAttribute("successMessage") %>
-                </div>
+            <div class="alert alert-success" role="alert">
+                <%= request.getAttribute("successMessage") %>
+            </div>
             <% } %>
 
             <form action="${pageContext.request.contextPath}/RegistraServlet" method="POST" id="registerForm">
                 <input type="hidden" name="role" value="student">
-                
+
                 <div class="mb-3">
                     <label for="username" class="form-label">Tên đăng nhập *</label>
                     <input type="text" class="form-control" id="username" name="username" 
@@ -118,12 +118,38 @@
                 </div>
 
                 <div class="mb-3">
+                    <label for="cccd" class="form-label">Giới tính *</label>
+                    <select type="text" class="form-control" id="gender" name="gender" require>  
+                        <option value="" <%= request.getAttribute("gender") == null ? "selected" : "" %>>Chọn giới tính</option>
+                        <option value="Nam" <%= "Nam".equals(request.getAttribute("gender")) ? "selected" : "" %>>Nam</option>
+                        <option value="Nữ" <%= "Nữ".equals(request.getAttribute("gender")) ? "selected" : "" %>>Nữ</option>
+                        <option value="Khác" <%= "Khác".equals(request.getAttribute("gender")) ? "selected" : "" %>>Khác</option>
+                    </select>
+                    <div class="form-text">Vui lòng chọn giới tính</div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="cccd" class="form-label">Địa chỉ *</label>
+                    <input type="text" class="form-control" id="address" name="address" 
+                           value="<%= request.getAttribute("address") != null ? request.getAttribute("address") : "" %>"
+                           placeholder="Đông Anh - Hà Nội" required>
+                    <div class="form-text">Vui lòng nhập địa chỉ đầy đủ</div>
+                </div>
+
+                <div class="mb-3">
                     <label for="phone" class="form-label">Số điện thoại *</label>
                     <input type="text" class="form-control" id="phone" name="phone"
                            value="<%= request.getAttribute("phone") != null ? request.getAttribute("phone") : "" %>"
                            placeholder="Nhập số điện thoại 10 hoặc 11 số" required maxlength="11">
                     <div class="form-text">Số điện thoại phải có 10 hoặc 11 số và không trùng với tài khoản khác</div>
                 </div>
+                <div class="mb-3">
+                    <label for="dob" class="form-label">Ngày sinh *</label>
+                    <input type="date" class="form-control" id="dob" name="dob" 
+                           value="<%= request.getAttribute("dob") != null ? request.getAttribute("dob") : "" %>"
+                           required>
+                </div>
+
 
                 <div class="mb-3">
                     <label for="password" class="form-label">Mật khẩu *</label>
@@ -151,7 +177,7 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <script>
             // Validate form trước khi submit
-            document.getElementById('registerForm').addEventListener('submit', function(e) {
+            document.getElementById('registerForm').addEventListener('submit', function (e) {
                 const password = document.getElementById('password').value;
                 const confirmPassword = document.getElementById('confirmPassword').value;
                 const email = document.getElementById('email').value;
@@ -189,10 +215,10 @@
                     return false;
                 }
             });
-            document.getElementById('cccd').addEventListener('input', function(e) {
+            document.getElementById('cccd').addEventListener('input', function (e) {
                 this.value = this.value.replace(/[^0-9]/g, '');
             });
-            document.getElementById('phone').addEventListener('input', function(e) {
+            document.getElementById('phone').addEventListener('input', function (e) {
                 this.value = this.value.replace(/[^0-9]/g, '');
             });
         </script>

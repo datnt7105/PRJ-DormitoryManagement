@@ -59,6 +59,7 @@ public class StudentLoginServlet extends HttpServlet {
                     // Đăng nhập thành công
                     HttpSession session = request.getSession();
                     session.setAttribute("student", student);
+                    session.setAttribute("studentId", student.getStudentId());
                     session.setAttribute("userType", "student");
                     
                     // Điều hướng đến dashboard

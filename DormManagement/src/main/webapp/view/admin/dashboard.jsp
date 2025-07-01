@@ -182,7 +182,7 @@
                                         <div class="dashboard-card">
                                             <div class="d-flex justify-content-between align-items-center h-100">
                                                 <div>
-                                                    <h6 class="mb-1">Tiền Hôm Nay</h6>
+                                                    <h6 class="mb-1">Doanh thu tháng này</h6>
                                                     <h3 class="mb-0">233,000 VNĐ</h3>
                                                     <small class="text-success">+5% so với hôm qua</small>
                                                 </div>
@@ -195,9 +195,9 @@
                                         <div class="dashboard-card">
                                             <div class="d-flex justify-content-between align-items-center h-100">
                                                 <div>
-                                                    <h6 class="mb-1">Người Dùng Hôm Nay</h6>
+                                                    <h6 class="mb-1">Số lượng sinh viên</h6>
                                                     <h3 class="mb-0">2,500</h3>
-                                                    <small class="text-success">+3% so với tuần trước</small>
+                                                    <small class="text-success">+3% so với kỳ trước</small>
                                                 </div>
                                                 <div class="icon"><i class="bi bi-people"></i></div>
                                             </div>
