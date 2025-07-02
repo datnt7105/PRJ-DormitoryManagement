@@ -57,6 +57,7 @@ public class StudentProfileServlet extends HttpServlet {
                 String address = request.getParameter("address");
                 String phone = request.getParameter("phone");
                 String dob = request.getParameter("dob");
+                
 
                 student.setFullName(fullName);
                 student.setGender(gender);

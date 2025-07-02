@@ -121,9 +121,9 @@
                     <label for="cccd" class="form-label">Giới tính *</label>
                     <select type="text" class="form-control" id="gender" name="gender" require>  
                         <option value="" <%= request.getAttribute("gender") == null ? "selected" : "" %>>Chọn giới tính</option>
-                        <option value="Nam" <%= "Nam".equals(request.getAttribute("gender")) ? "selected" : "" %>>Nam</option>
-                        <option value="Nữ" <%= "Nữ".equals(request.getAttribute("gender")) ? "selected" : "" %>>Nữ</option>
-                        <option value="Khác" <%= "Khác".equals(request.getAttribute("gender")) ? "selected" : "" %>>Khác</option>
+                        <option value="Male" <%= "Nam".equals(request.getAttribute("gender")) ? "selected" : "" %>>Nam</option>
+                        <option value="Female" <%= "Nữ".equals(request.getAttribute("gender")) ? "selected" : "" %>>Nữ</option>
+                        <option value="Other" <%= "Khác".equals(request.getAttribute("gender")) ? "selected" : "" %>>Khác</option>
                     </select>
                     <div class="form-text">Vui lòng chọn giới tính</div>
                 </div>

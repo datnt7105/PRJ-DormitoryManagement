@@ -86,9 +86,9 @@
                             <label for="gender" class="form-label">Giới tính</label>
                             <select class="form-select" id="gender" name="gender" required>
                                 <option value="" <c:if test="${empty student.gender}">selected</c:if>>Chọn giới tính</option>
-                                <option value="Nam" <c:if test="${student.gender == 'Nam'}">selected</c:if>>Nam</option>
-                                <option value="Nữ" <c:if test="${student.gender == 'Nữ'}">selected</c:if>>Nữ</option>
-                                <option value="Khác" <c:if test="${student.gender == 'Khác'}">selected</c:if>>Khác</option>
+                                <option value="Male" <c:if test="${student.gender == 'Male'}">selected</c:if>>Nam</option>
+                                <option value="Female" <c:if test="${student.gender == 'Female'}">selected</c:if>>Nữ</option>
+                                <option value="Other" <c:if test="${student.gender == 'Other'}">selected</c:if>>Khác</option>
                                 </select>
                             </div>
                             <div class="mb-3">

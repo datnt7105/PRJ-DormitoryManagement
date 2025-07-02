@@ -43,7 +43,7 @@ public class BuildingInfoServlet extends HttpServlet {
         String action = request.getParameter("action");
         try {
             if ("view".equals(action)) {
-                // Hiển thị chi tiết một tòa nhà cụ thể
+                
 //                int buildingId = Integer.parseInt(request.getParameter("buildingID"));
 //                Building building = buildingDAO.getBuildingById(buildingId);
                 String buildingIdParam = request.getParameter("buildingID");

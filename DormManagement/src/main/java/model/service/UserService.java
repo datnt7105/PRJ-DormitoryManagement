@@ -28,10 +28,9 @@ public class UserService {
         student.setPhone(phone);
         
         // Set các trường mặc định cho các trường không bắt buộc
-        student.setDob(java.sql.Date.valueOf("2000-01-01")); // Mặc định
-        student.setGender("Other"); // Mặc định
-        student.setAddress(""); // Để trống
-        
+        student.setDob(dob);
+        student.setGender(gender);
+        student.setAddress(address);
         // Set ngày tạo
         Calendar cal = Calendar.getInstance();
         student.setCreatedAt(new Date(cal.getTimeInMillis()));
