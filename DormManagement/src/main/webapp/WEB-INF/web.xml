@@ -32,6 +32,10 @@
         <servlet-name>BuildingInfoServlet</servlet-name>
         <servlet-class>controller.student.BuildingInfoServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RoomController</servlet-name>
+        <servlet-class>controller.admin.RoomController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -63,6 +67,10 @@
     <servlet-mapping>
         <servlet-name>BuildingInfoServlet</servlet-name>
         <url-pattern>/BuildingInfoServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RoomController</servlet-name>
+        <url-pattern>/RoomController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

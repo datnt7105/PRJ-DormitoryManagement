@@ -115,6 +115,12 @@
                                 </a>
                             </li>
                             <li class="nav-item">
+                                <a class="nav-link ${tab == 'rooms' ? 'active' : ''}" 
+                                   href="${pageContext.request.contextPath}/view/admin/dashboard.jsp?tab=rooms">
+                                    <i class="bi bi-door-open"></i> Phòng
+                                </a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link ${tab == 'students' ? 'active' : ''}" 
                                    href="${pageContext.request.contextPath}/view/admin/dashboard.jsp?tab=students">
                                     <i class="bi bi-people"></i> Sinh Viên
@@ -159,6 +165,10 @@
                                 request.setAttribute("buildings", buildings);
                             %>
                             <%@ include file="Building.jsp" %>
+                        </c:when>
+                        
+                        <c:when test="${tab == 'rooms'}">
+                            <%@ include file="Rooms.jsp" %>
                         </c:when>
                         
                         <c:when test="${tab == 'students'}">
