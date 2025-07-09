@@ -116,8 +116,8 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link ${tab == 'rooms' ? 'active' : ''}" 
-                                   href="${pageContext.request.contextPath}/view/admin/dashboard.jsp?tab=rooms">
-                                    <i class="bi bi-door-open"></i> Phòng
+                                   href="${pageContext.request.contextPath}/ViewRoomServlet">
+                                   <i class="bi bi-door-open"></i> Phòng
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -157,6 +157,7 @@
 
                 <!-- Main Content -->
                 <div class="col-md-9 col-lg-10 main-content">
+
                     <c:choose>
                         <c:when test="${tab == 'building'}">
                             <%
@@ -166,11 +167,11 @@
                             %>
                             <%@ include file="Building.jsp" %>
                         </c:when>
-                        
+
                         <c:when test="${tab == 'rooms'}">
                             <%@ include file="Rooms.jsp" %>
                         </c:when>
-                        
+
                         <c:when test="${tab == 'students'}">
                             <%@ include file="Students.jsp" %>
                         </c:when>

@@ -12,18 +12,18 @@ public class Building {
     private int buildingID;
     private String buildingName;
     private int adminID;
-    private int numberFloors;
+    private int floors;
     private String status;
     private String imageUrl;
 
     public Building() {
     }
 
-    public Building(int buildingID, String buildingName, int adminID, int numberFloors, String status, String imageUrl) {
+    public Building(int buildingID, String buildingName, int adminID, int floors, String status, String imageUrl) {
         this.buildingID = buildingID;
         this.buildingName = buildingName;
         this.adminID = adminID;
-        this.numberFloors = numberFloors;
+        this.floors = floors;
         this.status = status;
         this.imageUrl = imageUrl;
     }
@@ -52,12 +52,12 @@ public class Building {
         this.adminID = adminID;
     }
 
-    public int getNumberFloors() {
-        return numberFloors;
+    public int getFloors() {
+        return floors;
     }
 
-    public void setNumberFloors(int numberFloors) {
-        this.numberFloors = numberFloors;
+    public void setFloors(int floors) {
+        this.floors = floors;
     }
 
     public String getStatus() {
@@ -76,6 +76,6 @@ public class Building {
         this.imageUrl = imageUrl;
     }
 
-   
+    
     
 }

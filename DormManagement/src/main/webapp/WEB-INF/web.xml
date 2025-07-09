@@ -33,8 +33,16 @@
         <servlet-class>controller.student.BuildingInfoServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>RoomController</servlet-name>
-        <servlet-class>controller.admin.RoomController</servlet-class>
+        <servlet-name>ViewRoomServlet</servlet-name>
+        <servlet-class>controller.admin.ViewRoomServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddRoomServlet</servlet-name>
+        <servlet-class>controller.admin.AddRoomServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditRoomServlet</servlet-name>
+        <servlet-class>controller.admin.EditRoomServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
@@ -69,8 +77,16 @@
         <url-pattern>/BuildingInfoServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>RoomController</servlet-name>
-        <url-pattern>/RoomController</url-pattern>
+        <servlet-name>ViewRoomServlet</servlet-name>
+        <url-pattern>/ViewRoomServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddRoomServlet</servlet-name>
+        <url-pattern>/AddRoomServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditRoomServlet</servlet-name>
+        <url-pattern>/EditRoomServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -45,7 +45,7 @@
                         </c:choose>
                         <div class="card-body">
                             <h5 class="card-title">${building.buildingName}</h5>
-                            <p class="card-text">Số tầng: ${building.numberFloors} | Trạng thái: ${building.status == 'active' ? 'Hoạt động' : 'Không hoạt động'}</p>
+                            <p class="card-text">Số tầng: ${building.floors} | Trạng thái: ${building.status == 'active' ? 'Hoạt động' : 'Không hoạt động'}</p>
                         </div>
                         <div class="card-footer bg-white d-flex justify-content-between">
                             <a href="${pageContext.request.contextPath}/BuildingController?action=view&buildingID=${building.buildingID}" class="btn btn-sm btn-primary">
@@ -66,18 +66,18 @@
 </c:choose>
 
 <style>
-.card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-}
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
 </style>
 
 <script>
 // Auto-dismiss alerts after 5 seconds
-setTimeout(() => {
-    const alerts = document.querySelectorAll('.alert');
-    alerts.forEach(alert => {
-        new bootstrap.Alert(alert).close();
-    });
-}, 5000);
+    setTimeout(() => {
+        const alerts = document.querySelectorAll('.alert');
+        alerts.forEach(alert => {
+            new bootstrap.Alert(alert).close();
+        });
+    }, 5000);
 </script>

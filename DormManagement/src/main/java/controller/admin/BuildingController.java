@@ -16,12 +16,13 @@ import java.util.logging.Logger;
 import model.dao.DBContext;
 
 @MultipartConfig(
-    fileSizeThreshold = 1024 * 1024 * 2, // 2MB
-    maxFileSize = 1024 * 1024 * 10, // 10MB
-    maxRequestSize = 1024 * 1024 * 50 // 50MB
+        fileSizeThreshold = 1024 * 1024 * 2, // 2MB
+        maxFileSize = 1024 * 1024 * 10, // 10MB
+        maxRequestSize = 1024 * 1024 * 50 // 50MB
 )
 @WebServlet(name = "BuildingController", urlPatterns = {"/BuildingController"})
 public class BuildingController extends HttpServlet {
+
     private BuildingDAO buildingDAO;
 
     @Override
@@ -148,7 +149,7 @@ public class BuildingController extends HttpServlet {
 
     private void handleAddOrUpdate(HttpServletRequest request, HttpServletResponse response, int adminId, boolean isAdd) throws Exception {
         String buildingName = request.getParameter("buildingName");
-        int numberFloors = Integer.parseInt(request.getParameter("numberFloors"));
+        int floors = Integer.parseInt(request.getParameter("floors"));
         String status = request.getParameter("status");
 
         Part filePart = request.getPart("imageFile");
@@ -168,7 +169,7 @@ public class BuildingController extends HttpServlet {
 
         Building building = new Building();
         building.setBuildingName(buildingName);
-        building.setNumberFloors(numberFloors);
+        building.setFloors(floors);
         building.setStatus(status);
         building.setImageUrl(imageUrl);
         building.setAdminID(adminId);
@@ -197,7 +198,9 @@ public class BuildingController extends HttpServlet {
 
     private String extractFileName(Part part) {
         String contentDisp = part.getHeader("content-disposition");
-        if (contentDisp == null) return "";
+        if (contentDisp == null) {
+            return "";
+        }
         for (String s : contentDisp.split(";")) {
             if (s.trim().startsWith("filename")) {
                 return s.substring(s.indexOf("=") + 2, s.length() - 1);

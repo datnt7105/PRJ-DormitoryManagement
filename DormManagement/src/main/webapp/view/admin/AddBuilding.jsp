@@ -93,8 +93,8 @@
                                     <input type="text" class="form-control" id="buildingName" name="buildingName" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="numberFloors" class="form-label">Số Tầng</label>
-                                    <input type="number" class="form-control" id="numberFloors" name="numberFloors" min="1" required>
+                                    <label for="floors" class="form-label">Số Tầng</label>
+                                    <input type="number" class="form-control" id="floors" name="floors" min="1" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="status" class="form-label">Trạng Thái</label>

@@ -10,7 +10,6 @@ import java.util.List;
 import model.entity.Building;
 
 public class BuildingDAO {
-
     private Connection conn;
     private String imageBasePath;
 
@@ -64,7 +63,7 @@ public class BuildingDAO {
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, building.getBuildingName());
             pstmt.setInt(2, building.getAdminID());
-            pstmt.setInt(3, building.getNumberFloors());
+            pstmt.setInt(3, building.getFloors()); // Đổi từ getNumberFloors() -> getFloors()
             pstmt.setString(4, building.getStatus());
             pstmt.setString(5, building.getImageUrl());
             return pstmt.executeUpdate() > 0;
@@ -76,7 +75,7 @@ public class BuildingDAO {
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, building.getBuildingName());
             pstmt.setInt(2, building.getAdminID());
-            pstmt.setInt(3, building.getNumberFloors());
+            pstmt.setInt(3, building.getFloors()); // Đổi từ getNumberFloors() -> getFloors()
             pstmt.setString(4, building.getStatus());
             pstmt.setString(5, building.getImageUrl());
             pstmt.setInt(6, building.getBuildingID());
@@ -87,7 +86,6 @@ public class BuildingDAO {
     public boolean deleteBuilding(int buildingID) throws SQLException {
         Building building = getBuildingById(buildingID);
         if (building != null && building.getImageUrl() != null && !building.getImageUrl().isEmpty()) {
-            // Lấy phần tên file từ ImageUrl (giả sử ImageUrl là /images/filename.jpg)
             String fileName = building.getImageUrl().substring(building.getImageUrl().lastIndexOf("/") + 1);
             String filePath = imageBasePath + File.separator + fileName;
             File file = new File(filePath);

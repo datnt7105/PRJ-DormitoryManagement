@@ -102,7 +102,7 @@
                                 <div class="card-body">
                                     <h4 class="card-title">${building.buildingName}</h4>
                                     <p class="card-text"><strong>Mã Tòa Nhà:</strong> ${building.buildingID}</p>
-                                    <p class="card-text"><strong>Số Tầng:</strong> ${building.numberFloors}</p>
+                                    <p class="card-text"><strong>Số Tầng:</strong> ${building.floors}</p>
                                     <p class="card-text"><strong>Trạng Thái:</strong> 
                                         <c:choose>
                                             <c:when test="${building.status == 'active'}">Hoạt động</c:when>
