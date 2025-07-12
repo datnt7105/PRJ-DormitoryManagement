@@ -13,7 +13,7 @@ public class UserService {
         studentDAO = new StudentDAO();
     }
     
-    public boolean registerUser(String username, String email, String password, String fullName, String cccd, String phone, String gender, String address, Date dob) throws SQLException {
+    public boolean registerUser(String username, String email, String password, String fullName, String cccd, String phone, String dob, String gender) throws SQLException {
         // Kiểm tra xem username, email hoặc phone đã tồn tại chưa
         if (studentDAO.checkUserExists(username, email) || studentDAO.isPhoneExists(phone)) {
             return false;
@@ -27,10 +27,15 @@ public class UserService {
         student.setFullName(fullName);
         student.setPhone(phone);
         
-        // Set các trường mặc định cho các trường không bắt buộc
-        student.setDob(dob);
-        student.setGender(gender);
-        student.setAddress(address);
+        // Set các trường lấy từ form
+        if (dob != null && !dob.isEmpty()) {
+            student.setDob(java.sql.Date.valueOf(dob));
+        }
+        if (gender != null && !gender.isEmpty()) {
+            student.setGender(gender);
+        }
+        student.setAddress(""); // Để trống
+        
         // Set ngày tạo
         Calendar cal = Calendar.getInstance();
         student.setCreatedAt(new Date(cal.getTimeInMillis()));

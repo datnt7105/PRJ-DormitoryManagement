@@ -62,7 +62,7 @@
     </head>
     <body>
         <div class="header">
-            <a href="${pageContext.request.contextPath}/RegistraServlet" class="nav-link">Đăng Ký</a>
+            <a href="${pageContext.request.contextPath}/RegisterServlet" class="nav-link">Đăng Ký</a>
             <a href="${pageContext.request.contextPath}/view/common/login.jsp" class="nav-link">Đăng Nhập</a>
         </div>
         <div class="login-container">
@@ -79,7 +79,7 @@
                 </div>
                 <button type="submit">Đăng Nhập</button>
             </form>
-            <a href="${pageContext.request.contextPath}/RegistraServlet">Chưa có tài khoản? Đăng Ký</a>
+            <a href="${pageContext.request.contextPath}/RegisterServlet">Chưa có tài khoản? Đăng Ký</a>
         </div>
     </body>
 </html>

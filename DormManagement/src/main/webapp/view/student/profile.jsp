@@ -39,115 +39,39 @@
                 <div class="error-message">${formErrorMessage}</div>
             </c:if>
 
-            <div class="btn-group mb-4">
-                <a href="${pageContext.request.contextPath}/student/profile?action=edit" class="btn btn-warning">Sửa thông tin</a>
-                <a href="${pageContext.request.contextPath}/student/profile?action=addParent" class="btn btn-success">Thêm thông tin phụ huynh</a>
-            </div>
-
-            <c:choose>
-                <c:when test="${param.action == null || param.action == 'view'}">
-                    <!-- View Mode -->
-                    <h4>Thông tin sinh viên</h4>
-                    <p><strong>Họ và tên:</strong> <c:out value="${student.fullName}" default="N/A"/></p>
-                    <p><strong>Email:</strong> <c:out value="${student.email}" default="N/A"/></p>
-                    <p><strong>Ngày sinh:</strong> <fmt:formatDate value="${student.dob}" pattern="yyyy-MM-dd"/>
-                    <p><strong>Giới tính:</strong> <c:out value="${student.gender}" default="N/A"/></p>
-                    <p><strong>Số điện thoại:</strong> <c:out value="${student.phone}" default="N/A"/></p>
-                    <p><strong>Địa chỉ:</strong> <c:out value="${student.address}" default="N/A"/></p>
-                    <p><strong>Trạng thái phòng:</strong> <c:out value="${student.statusRoom}" default="N/A"/></p>
-
-                    <h4>Thông tin phụ huynh</h4>
-                    <c:choose>
-                        <c:when test="${not empty parents}">
-                            <c:forEach var="parent" items="${parents}">
-                                <div class="card mb-3">
-                                    <div class="card-body">
-                                        <p><strong>Tên phụ huynh:</strong> <c:out value="${parent.parentName}" default="N/A"/></p>
-                                        <p><strong>Số điện thoại:</strong> <c:out value="${parent.phone}" default="N/A"/></p>
-                                        <p><strong>Mối quan hệ:</strong> <c:out value="${parent.relationship}" default="N/A"/></p>
-                                    </div>
-                                </div>
-                            </c:forEach>
-                        </c:when>
-                        <c:otherwise>
-                            <p>Chưa có thông tin phụ huynh.</p>
-                        </c:otherwise>
-                    </c:choose>
-                </c:when>
-
-                <c:when test="${param.action == 'edit'}">
-                    <!-- Edit Mode -->
-                    <form action="${pageContext.request.contextPath}/student/profile?action=update" method="POST">
-                        <div class="mb-3">
-                            <label for="fullName" class="form-label">Họ và tên</label>
-                            <input type="text" class="form-control" id="fullName" name="fullName" value="<c:out value='${student.fullName}'/>" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="gender" class="form-label">Giới tính</label>
-                            <select class="form-select" id="gender" name="gender" required>
-                                <option value="" <c:if test="${empty student.gender}">selected</c:if>>Chọn giới tính</option>
-                                <option value="Male" <c:if test="${student.gender == 'Male'}">selected</c:if>>Nam</option>
-                                <option value="Female" <c:if test="${student.gender == 'Female'}">selected</c:if>>Nữ</option>
-                                <option value="Other" <c:if test="${student.gender == 'Other'}">selected</c:if>>Khác</option>
-                                </select>
-                            </div>
-                            <div class="mb-3">
-                                <label for="address" class="form-label">Địa chỉ</label>
-                                <input type="text" class="form-control" id="address" name="address" value="<c:out value='${student.address}'/>">
-                        </div>
-                        <div class="mb-3">
-                            <label for="phone" class="form-label">Số điện thoại</label>
-                            <input type="text" class="form-control" id="phone" name="phone" value="<c:out value='${student.phone}'/>">
-                        </div>
-                        <div class="mb-3">
-                            <label for="dob" class="form-label">Ngày sinh</label>
-                            <input type="date" class="form-control" id="dob" name="dob" value="<c:out value='${student.dob}'/>">
-                        </div>
-
-                        <h4>Thông tin phụ huynh</h4>
-                        <c:forEach var="parent" items="${parents}">
-                            <div class="card mb-3">
-                                <div class="card-body">
-                                    <input type="hidden" name="parentId" value="${parent.studentParentId}">
-                                    <div class="mb-3">
-                                        <label for="parentName_${parent.studentParentId}" class="form-label">Tên phụ huynh</label>
-                                        <input type="text" class="form-control" id="parentName_${parent.studentParentId}" name="parentName_${parent.studentParentId}" value="<c:out value='${parent.parentName}'/>" required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="parentPhone_${parent.studentParentId}" class="form-label">Số điện thoại</label>
-                                        <input type="text" class="form-control" id="parentPhone_${parent.studentParentId}" name="parentPhone_${parent.studentParentId}" value="<c:out value='${parent.phone}'/>">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="relationship_${parent.studentParentId}" class="form-label">Mối quan hệ</label>
-                                        <input type="text" class="form-control" id="relationship_${parent.studentParentId}" name="relationship_${parent.studentParentId}" value="<c:out value='${parent.relationship}'/>" required>
-                                    </div>
-                                </div>
-                            </div>
-                        </c:forEach>
-                        <button type="submit" class="btn btn-primary">Cập nhật</button>
-                    </form>
-                </c:when>
-
-                <c:when test="${param.action == 'addParent'}">
-                    <!-- Add Parent Mode -->
-                    <form action="${pageContext.request.contextPath}/student/profile?action=add" method="POST">
-                        <h4>Thêm thông tin phụ huynh</h4>
-                        <div class="mb-3">
-                            <label for="parentName" class="form-label">Tên phụ huynh</label>
-                            <input type="text" class="form-control" id="parentName" name="parentName" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="parentPhone" class="form-label">Số điện thoại</label>
-                            <input type="text" class="form-control" id="parentPhone" name="parentPhone">
-                        </div>
-                        <div class="mb-3">
-                            <label for="relationship" class="form-label">Mối quan hệ</label>
-                            <input type="text" class="form-control" id="relationship" name="relationship" required>
-                        </div>
-                        <button type="submit" class="btn btn-success">Thêm phụ huynh</button>
-                    </form>
-                </c:when>
-            </c:choose>
+            <form action="${pageContext.request.contextPath}/student/profile?action=update" method="POST">
+                <div class="mb-3">
+                    <label for="fullName" class="form-label">Họ và tên</label>
+                    <input type="text" class="form-control" id="fullName" name="fullName" value="${student.fullName}" required>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" value="${student.email}" required>
+                </div>
+                <div class="mb-3">
+                    <label for="phone" class="form-label">Số điện thoại</label>
+                    <input type="text" class="form-control" id="phone" name="phone" value="${student.phone}" required>
+                </div>
+                <div class="mb-3">
+                    <label for="cccd" class="form-label">CCCD</label>
+                    <input type="text" class="form-control" id="cccd" name="cccd" value="${student.cccd}" maxlength="12" pattern="\d{12}">
+                    <div class="form-text">CCCD phải có đúng 12 ký tự số</div>
+                </div>
+                <div class="mb-3">
+                    <label for="dob" class="form-label">Ngày sinh</label>
+                    <input type="date" class="form-control" id="dob" name="dob" value="${student.dob}" required>
+                </div>
+                <div class="mb-3">
+                    <label for="gender" class="form-label">Giới tính</label>
+                    <select class="form-select" id="gender" name="gender" required>
+                        <option value="" ${empty student.gender ? 'selected' : ''}>Chọn giới tính</option>
+                        <option value="Male" ${student.gender == 'Male' ? 'selected' : ''}>Nam</option>
+                        <option value="Female" ${student.gender == 'Female' ? 'selected' : ''}>Nữ</option>
+                        <option value="Other" ${student.gender == 'Other' ? 'selected' : ''}>Khác</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Cập nhật</button>
+            </form>
 
             <a href="${pageContext.request.contextPath}/view/student/dashboardStudent.jsp" class="btn btn-secondary mt-3">Quay lại Dashboard</a>
         </div>

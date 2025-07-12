@@ -91,7 +91,7 @@
 SELECT COLUMN_NAME, DATA_TYPE 
 FROM INFORMATION_SCHEMA.COLUMNS 
 WHERE TABLE_NAME = 'Students' 
-AND COLUMN_NAME IN ('StudentCode', 'CCCD');
+AND COLUMN_NAME IN ('CCCD');
 
 -- Kiểm tra record mới được tạo
 SELECT Username, Email, FullName, StudentCode, CCCD, CreatedAt 

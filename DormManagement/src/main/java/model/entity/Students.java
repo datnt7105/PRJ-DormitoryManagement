@@ -15,11 +15,13 @@ public class Students {
     private String statusRoom;
     private Date createdAt;
     private Date updatedAt;
+    private String cccd;
+    private int isApproved;
 
     public Students() {
     }
 
-    public Students(int studentId, String username, String password, String email, String fullName, Date dob, String gender, String phone, String address, String statusRoom, Date createdAt, Date updatedAt) {
+    public Students(int studentId, String username, String password, String email, String fullName, Date dob, String gender, String phone, String address, String statusRoom, Date createdAt, Date updatedAt, String cccd) {
         this.studentId = studentId;
         this.username = username;
         this.password = password;
@@ -32,6 +34,7 @@ public class Students {
         this.statusRoom = statusRoom;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+        this.cccd = cccd;
     }
 
     public int getStudentId() {
@@ -128,5 +131,19 @@ public class Students {
 
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public String getCccd() {
+        return cccd;
+    }
+    public void setCccd(String cccd) {
+        this.cccd = cccd;
+    }
+
+    public int getIsApproved() {
+        return isApproved;
+    }
+    public void setIsApproved(int isApproved) {
+        this.isApproved = isApproved;
     }
 }

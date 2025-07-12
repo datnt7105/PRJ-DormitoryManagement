@@ -84,7 +84,7 @@
             </div>
             <% } %>
 
-            <form action="${pageContext.request.contextPath}/RegistraServlet" method="POST" id="registerForm">
+            <form action="${pageContext.request.contextPath}/RegisterServlet" method="POST" id="registerForm">
                 <input type="hidden" name="role" value="student">
 
                 <div class="mb-3">
@@ -109,13 +109,7 @@
                            required>
                 </div>
 
-                <div class="mb-3">
-                    <label for="cccd" class="form-label">CCCD *</label>
-                    <input type="text" class="form-control" id="cccd" name="cccd" 
-                           value="<%= request.getAttribute("cccd") != null ? request.getAttribute("cccd") : "" %>"
-                           placeholder="123456789012" required>
-                    <div class="form-text">CCCD phải có đúng 12 ký tự số</div>
-                </div>
+                <!-- Đã xóa trường nhập CCCD -->
 
                 <div class="mb-3">
                     <label for="cccd" class="form-label">Giới tính *</label>

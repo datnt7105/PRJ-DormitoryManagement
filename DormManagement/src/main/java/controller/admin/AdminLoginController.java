@@ -11,7 +11,6 @@ import model.service.AdminService;
 import model.entity.Admin;
 import model.dao.AdminDAO;
 
-@WebServlet(name = "AdminLoginController", urlPatterns = {"/AdminLoginController"})
 public class AdminLoginController extends HttpServlet {
 
     private AdminService adminService;

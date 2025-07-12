@@ -12,7 +12,7 @@ public class AdminDAO {
     private final DBContext dbContext;
 
     public AdminDAO() {
-        this.dbContext = DBContext.getInstance(); // Giả định DBContext đã được singleton
+        this.dbContext = DBContext.getInstance(); 
     }
 
     /**

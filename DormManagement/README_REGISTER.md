@@ -10,7 +10,6 @@ Chức năng đăng ký đã được cập nhật để hỗ trợ các trườ
 ## Các file đã được cập nhật
 
 ### 1. Entity (Students.java)
-- Thêm trường `studentCode` (String)
 - Thêm trường `cccd` (String)
 - Cập nhật constructor và getter/setter
 
@@ -42,8 +41,7 @@ Chức năng đăng ký đã được cập nhật để hỗ trợ các trườ
 ### 1. Cập nhật Database
 Chạy script SQL trong file `database_update.sql` để thêm các cột mới:
 ```sql
--- Thêm cột StudentCode và CCCD vào bảng Students
-ALTER TABLE Students ADD StudentCode VARCHAR(10);
+-- Thêm cột CCCD vào bảng Students
 ALTER TABLE Students ADD CCCD VARCHAR(12);
 ```
 
@@ -103,6 +101,5 @@ URL: `http://localhost:8080/DormManagement/RegistraServlet`
 
 1. Đảm bảo database đã được cập nhật trước khi sử dụng
 2. Kiểm tra kết nối database trong `DBContext.java`
-3. Có thể thêm ràng buộc UNIQUE cho StudentCode và CCCD nếu cần
-4. Có thể tùy chỉnh validation rules trong `UserService.java` 
- 
+3. Có thể thêm ràng buộc UNIQUE cho CCCD nếu cần
+4. Có thể tùy chỉnh validation rules trong `

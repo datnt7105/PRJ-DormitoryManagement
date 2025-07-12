@@ -122,7 +122,7 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link ${tab == 'students' ? 'active' : ''}" 
-                                   href="${pageContext.request.contextPath}/view/admin/dashboard.jsp?tab=students">
+                                   href="${pageContext.request.contextPath}/student-manager">
                                     <i class="bi bi-people"></i> Sinh Viên
                                 </a>
                             </li>

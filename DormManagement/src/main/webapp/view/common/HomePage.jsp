@@ -7,7 +7,7 @@
 </head>
 <body>
     <div class="header">
-        <a href="${pageContext.request.contextPath}/RegistraServlet" class="nav-link">Đăng Ký</a>
+        <a href="${pageContext.request.contextPath}/RegisterServlet" class="nav-link">Đăng Ký</a>
         <a href="${pageContext.request.contextPath}/view/common/login.jsp" class="nav-link">Đăng Nhập</a>
     </div>
     <div class="content">
